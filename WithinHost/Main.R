@@ -5,10 +5,10 @@ library("deSolve")
 library("adaptMCMC")
 library(parallel)
 
+
 lb = c( -1,  0,    1,  -1,  -1,   -1,  -1)-0.5
 ub = c(  1,  5,     6,  1,   1,    1,   1)+0.5
 x0 = c(0.35,  3.5,  3.5,  0.5, -0.9, 0.5,  0.35)+runif(1)*0.1
-# set.seed(runif(1))
 
 dimension <- 7
 global.min <- 0
@@ -22,3 +22,34 @@ out_SA = GenSA(par = x0, lower = lb, upper = ub, fn = optimal_withinHostTrans_tr
                HourScaling=1, PopDist_Placebo=data$PopDist.Placebo, PlaceboScaleHour=data$PlaceboScaleHour,
                PopDist_Oseltamivir=data$PopDist.Oseltamivir, OseltamivirScaleHour=data$OseltamivirScaleHour,
                lb=lb, ub=ub, returnLog=100, eiSingle=1, parasNum=length(x0), otherParas=c()) 
+
+# The demo of data:
+# $Baloxavir for viral load
+# [,1] [,2]
+# [1,]    1  XX
+# ...
+# [7,]    9  XX
+# 
+# $Oseltamivir for viral load
+# [,1] [,2]
+# [1,]    1  XX
+# ...
+# [7,]    9  XX
+# 
+# $Placebo for viral load
+# [,1] [,2]
+# [1,]    1  XX
+# ...
+# [7,]    9  XX
+# 
+# $PopDist.Baloxavir for # of patients treated each day
+# [,1] [,2] [,3] [,4]
+# [1,]   XX  XX  XX   XX
+# 
+# $PopDist.Oseltamivir for # of patients treated each day
+# [,1] [,2] [,3] [,4]
+# [1,]   XX  XX  XX   XX
+# 
+# $PopDist.Placebo for # of patients treated each day
+# [,1] [,2] [,3] [,4]
+# [1,]   XX  XX  XX   XX
